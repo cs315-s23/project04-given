@@ -13,11 +13,11 @@ static void unsupported(char *s, uint32_t n) {
 }
 
 static void rv_one(rv_state *state) {
-    uint32_t iw;
+    uint32_t iw  = *((uint32_t*) state->pc);
+    //iw = cache_lookup(&state->i_cache, (uint64_t) state->pc);
+
     uint32_t opcode = get_bits(iw, 0, 7);
 
-    //iw = *((uint32_t*) state->pc);
-    iw = cache_lookup(&state->i_cache, (uint64_t) state->pc);
 
 #if DEBUG
     printf("iw: %x\n", iw);
